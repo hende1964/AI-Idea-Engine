@@ -1,7 +1,6 @@
 flask
 waitress
 openai
-fastapi
-uvicorn[standard]
 streamlit
+
 
