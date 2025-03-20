@@ -1,6 +1,7 @@
 flask
-waitress
+gunicorn
 openai
+uvicorn[standard]
 streamlit
 
 
