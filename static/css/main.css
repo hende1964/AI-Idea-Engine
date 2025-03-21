@@ -1,0 +1,123 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.works-in-progress {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #FFD700, #FFB700);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.works-in-progress img {
+    display: none;
+}
+
+.works-in-progress::before {
+    content: "\2692";
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.seats-remaining {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #FF4E50, #F9D423);
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    z-index: 1000;
+    text-align: left;
+    width: 220px;
+    box-shadow: 0 0 8px rgba(255, 105, 0, 0.5);
+    line-height: 1.2;
+}
+
+.seats-remaining p {
+    margin: 4px 0;
+}
+
+.seats-remaining strong {
+    color: #fff;
+}
+
+.google-text {
+    font-family: 'Product Sans', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #4285F4;
+    margin-top: 60px;
+}
+
+.mainhero {
+    margin-top: 30px;
+}
+
+.btn-container a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    color: #4285F4;
+    background-color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.mainoverview {
+    margin-top: 40px;
+}
+
+.maincard {
+    display: inline-block;
+    padding: 20px;
+    margin: 20px;
+    background: #333;
+    border-radius: 8px;
+}
+
+.why-ai {
+    margin-top: 30px;
+    background: #1c1c1c;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.why-ai-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4285F4;
+    margin-bottom: 20px;
+}
+
+.why-ai p {
+    text-align: left;
+    max-width: 700px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+}
+
+.why-ai p::before {
+    content: "\2022";
+    color: #4285F4;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+

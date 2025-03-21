@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>AI Idea Engine</title>
+    <meta name="description" content="AI Idea Engine is an open-source platform to create, innovate, and develop future technologies. Get started with AI-powered development.">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Product+Sans:wght@400;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/jquery/jquery-1.11.2.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery/jquery-ui.min.js') }}"></script>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/icons/favicon.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='img/icons/logo_ios.png') }}">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .works-in-progress {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #FFD700, #FFB700);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .seats-remaining {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #FF4E50, #F9D423);
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            z-index: 1000;
+            text-align: left;
+            width: 220px;
+            box-shadow: 0 0 8px rgba(255, 105, 0, 0.5);
+            line-height: 1.2;
+        }
+        .google-text {
+            font-family: 'Product Sans', sans-serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #4285F4;
+            margin-top: 60px;
+        }
+        .mainhero {
+            margin-top: 30px;
+        }
+        .btn-container a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            color: #4285F4;
+            background-color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Bars -->
+    <div class="works-in-progress">Evolving in Real-Time</div>
+    <div class="seats-remaining">
+        <p>Beta Access: <strong>Sold Out</strong></p>
+        <p>Early Adopter Seats Left: <span id="seatCount">5000</span></p>
+        <p>Projected Pricing: <strong>$149 - $499/month</strong></p>
+        <p>Each phase increases by 20% – <strong>Secure your spot early!</strong></p>
+    </div>
+
+    <!-- AI Dominance GPU Clock -->
+    <div id="gpuClockContainer" style="
+        position: fixed;
+        top: 50px;
+        left: 10px;
+        background: black;
+        color: #00FF00;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+        font-size: 16px;
+        z-index: 1000;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    ">
+        AI Dominance GPU Clock: <span id="gpuClockValue">1.936895472 Billion</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let gpuElement = document.getElementById('gpuClockValue');
+            if (!gpuElement) return;
+
+            let gpuCount = 1.936895472;  // Initial value
+            const growthPerSecond = 1.27 / (365 * 24 * 60 * 60);
+
+            function updateGPUDominanceClock() {
+                gpuCount += growthPerSecond;
+                gpuElement.textContent = gpuCount.toFixed(9) + " Billion";
+            }
+
+            setInterval(updateGPUDominanceClock, 1000);
+        });
+    </script>
+
+    <!-- Main Heading -->
+    <div class="google-text">AI Idea Engine</div>
+
+    <!-- Main Section -->
+    <div class="mainhero">
+        <p class="mainsummary">Conceive the Idea</p> 
+        <p class="mainsummary">Validate & Plan</p>
+        <p class="mainsummary">Design & Prototype</p>
+        <p class="mainsummary">Develop & Launch</p>
+        <p class="mainsummary">Grow & Scale</p>
+        <div class="btn-container">
+            <a href="/getting-started">Get Started with AI Idea Engine</a>
+            <a href="/learn-more">Learn More</a>
+        </div>
+    </div>
+
+    <!-- Why AI Idea Engine? -->
+    <div class="why-ai">
+        <h2>Why an AI Idea Engine?</h2>
+        <h3>The Problem – Everyone is Building a Cage...</h3>
+        <h3>The Idea Engine - Taking Back Sovereignty</h3>
+        <p><strong>Big Tech is building closed systems</strong> – Every stage is monetized, and you have zero control.</p>
+        <p><strong>They collect your data</strong> – Every bit is sold to monetize you. Up to 40% of your time is ads!</p>
+        <h3>Built on Creative Freedom.</h3>
+        <p><strong>Your Content. Your Access. Your Control.</strong></p>
+        <p><strong>Just like a house</strong> – You need materials to build it. Weak foundations crumble.</p>
+        <p><strong>Planning matters</strong> – Know the costs before you start.</p>
+        <p><strong>Execution is key</strong> – A well-built system runs itself.</p>
+        <h3>The Blueprint for Success</h3>
+        <p><strong>Define the Problem & Vision</strong> – What problem does your AI solve? Who benefits?</p>
+        <p><strong>Establish Success Metrics</strong> – Define clear goals for growth and impact.</p>
+        <p><strong>Build the Tech & Team</strong> – Choose AI models, tools, and develop a roadmap.</p>
+        <p><strong>Market & Industry Fit</strong> – What industries need your AI? Who will pay?</p>
+        <p><strong>Execute & Scale</strong> – Set milestones for development, launch, and growth.</p>
+    </div>
+
+    <!-- Quick Overview -->
+    <div class="mainoverview">
+        <h2>Quick Overview</h2>
+        <div class="maincard">Individuals</div>
+        <div class="maincard">Businesses</div>
+        <div class="maincard">Developers</div>
+    </div>
+</body>
+</html>

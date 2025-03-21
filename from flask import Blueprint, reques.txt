@@ -1,0 +1,37 @@
+from flask import Blueprint, request, jsonify, render_template
+import openai
+import os
+
+# Define a Blueprint for modularity
+routes = Blueprint('routes', __name__)
+
+# Set OpenAI API Key securely from environment variables
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+@routes.route('/')
+def home():
+    """Render the homepage"""
+    return render_template('index.html')
+
+@routes.route('/generate-idea', methods=['POST'])
+def generate_idea():
+    """Handles AI-generated idea requests"""
+    data = request.json
+    prompt = data.get('prompt')
+
+    if not prompt:
+        return jsonify({'error': 'Prompt is required'}), 400
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a creative AI assistant."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        idea = response.choices[0].message['content'].strip()
+        return jsonify({'idea': idea})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
