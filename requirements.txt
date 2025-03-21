@@ -1,6 +1,1 @@
-flask
-waitress
-openai
-streamlit
-transformers
-
+Flask==2.3.3python-dotenv==1.0.1openai==1.14.2waitress==2.1.2transformers==4.37.2torch==2.2.1fastapi==0.110.0uvicorn==0.29.0requests==2.31.0pydantic==1.10.13aiohttp==3.9.3httpx==0.27.0 
