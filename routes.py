@@ -2,19 +2,23 @@ from flask import Blueprint, request, jsonify, render_template
 import openai
 import os
 from database import insert_idea, get_all_ideas
+import logging
 
-# Define Blueprint with a clear name
-main_routes = Blueprint('main_routes', __name__)
+# Define Blueprint clearly
+routes = Blueprint('routes', __name__)
 
 # Load OpenAI API key from environment variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-@main_routes.route('/')
+if not openai.api_key:
+    logging.error("❌ OpenAI API key is missing. Check your .env file.")
+
+@routes.route('/')
 def home():
     """Render the homepage with the index template."""
     return render_template('index.html')
 
-@main_routes.route('/generate-idea', methods=['POST'])
+@routes.route('/generate-idea', methods=['POST'])
 def generate_idea():
     """Generate an AI idea based on user input."""
     data = request.json
@@ -38,15 +42,21 @@ def generate_idea():
 
         return jsonify({'idea': idea})
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    except openai.error.OpenAIError as e:
+        logging.error(f"OpenAI API error: {e}")
+        return jsonify({'error': 'OpenAI API error occurred.'}), 500
 
-@main_routes.route('/ideas', methods=['GET'])
+    except Exception as e:
+        logging.error(f"Unexpected error: {e}")
+        return jsonify({'error': 'Unexpected server error.'}), 500
+
+@routes.route('/ideas', methods=['GET'])
 def fetch_ideas():
     """Fetch all stored ideas from the database."""
     try:
         ideas = get_all_ideas()
         return jsonify({'ideas': ideas})
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        logging.error(f"Database retrieval error: {e}")
+        return jsonify({'error': 'Failed to retrieve ideas from the database.'}), 500
 
