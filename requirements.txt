@@ -1,6 +1,10 @@
-
 Flask==3.1.0
 openai==1.6.1
 waitress==3.0.2
 transformers==4.48.1
 huggingface-hub==0.28.0
+
+# Future dependencies
+# pymongo==4.5.0
+# motor==3.3.1
+
