@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, jsonify
 import openai
 import os
 import logging
@@ -6,44 +6,46 @@ from config import Config
 from routes import routes as main_routes
 from waitress import serve
 
-# Initialize Flask App
+# Initialize Flask application
 app = Flask(__name__)
 
-# Load configuration
+# Load app configuration from Config object
 app.config.from_object(Config)
 
-# Securely load the OpenAI API Key
+# Set OpenAI API key securely from configuration
 openai.api_key = app.config.get('OPENAI_API_KEY')
 if not openai.api_key:
-    logging.error("ERROR: OpenAI API Key is missing. Check your .env or Railway secrets.")
+    logging.error("❌ ERROR: OpenAI API Key is missing. Check .env or Railway secrets.")
+else:
+    logging.info("✅ OpenAI API Key successfully loaded.")
 
-# Register Blueprints
+# Register blueprints
 app.register_blueprint(main_routes)
 
-# Configure logging without emojis (console and file logging)
+# Setup logging (console and persistent file)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.StreamHandler(),  # Logs to console
-        logging.FileHandler("error_log.txt")  # Logs to file
+        logging.StreamHandler(),
+        logging.FileHandler("error_log.txt", mode='a')
     ]
 )
 
-# Simple health check route
+# Health check endpoint (used by Railway)
 @app.route("/health")
 def health_check():
-    return jsonify({"status": "Server is running"}), 200
+    return jsonify({"status": "✅ Server is running"}), 200
 
+# Entry point for production server using Waitress
 if __name__ == '__main__':
-    # Dynamically set the port for Railway
-    port = int(os.getenv("PORT", 8080))
-    logging.info(f"AI Idea Engine launching at http://0.0.0.0:{port}")
-
     try:
+        port = int(os.getenv("PORT", 8080))  # Default fallback
+        logging.info(f"🚀 AI Idea Engine launching at http://0.0.0.0:{port}")
         serve(app, host='0.0.0.0', port=port)
     except Exception as e:
-        logging.error(f"Failed to start server: {e}")
+        logging.error(f"❌ Failed to start server: {e}")
+
 
 
 
