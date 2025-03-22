@@ -1,6 +1,6 @@
+
 Flask==3.1.0
-openai==1.10.0
-waitress==3.0.0
-python-dotenv==1.0.1
-transformers==4.38.2
-huggingface-hub==0.20.3
+openai==1.6.1
+waitress==3.0.2
+transformers==4.48.1
+huggingface-hub==0.28.0
