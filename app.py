@@ -9,18 +9,8 @@ from waitress import serve
 # Initialize Flask application
 app = Flask(__name__)
 
-# Load app configuration from Config object
+# Load configuration from .env or Railway variables
 app.config.from_object(Config)
-
-# Set OpenAI API key securely from configuration
-openai.api_key = app.config.get('OPENAI_API_KEY')
-if not openai.api_key:
-    logging.error("❌ ERROR: OpenAI API Key is missing. Check .env or Railway secrets.")
-else:
-    logging.info("✅ OpenAI API Key successfully loaded.")
-
-# Register blueprints
-app.register_blueprint(main_routes)
 
 # Setup logging (console and persistent file)
 logging.basicConfig(
@@ -32,19 +22,30 @@ logging.basicConfig(
     ]
 )
 
-# Health check endpoint (used by Railway)
+# Load OpenAI API key securely
+openai.api_key = app.config.get("OPENAI_API_KEY")
+if not openai.api_key:
+    logging.error("❌ ERROR: OpenAI API Key is missing. Check Railway or .env.")
+else:
+    logging.info("✅ OpenAI API Key successfully loaded.")
+
+# Register routes
+app.register_blueprint(main_routes)
+
+# Health check for Railway
 @app.route("/health")
 def health_check():
     return jsonify({"status": "✅ Server is running"}), 200
 
-# Entry point for production server using Waitress
+# Run app using Waitress
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8080))
+    logging.info(f"🚀 Launching AI Idea Engine on http://0.0.0.0:{port}")
     try:
-        port = int(os.getenv("PORT", 8080))  # Default fallback
-        logging.info(f"🚀 AI Idea Engine launching at http://0.0.0.0:{port}")
         serve(app, host='0.0.0.0', port=port)
     except Exception as e:
         logging.error(f"❌ Failed to start server: {e}")
+
 
 
 
