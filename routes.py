@@ -11,7 +11,9 @@ routes = Blueprint('routes', __name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai.api_key:
-    logging.error("❌ OpenAI API key is missing. Check your .env file.")
+    logging.error("❌ OpenAI API key is missing. Check your .env file or Railway variables.")
+else:
+    logging.info("✅ OpenAI API key loaded successfully.")
 
 @routes.route('/')
 def home():
@@ -59,4 +61,21 @@ def fetch_ideas():
     except Exception as e:
         logging.error(f"Database retrieval error: {e}")
         return jsonify({'error': 'Failed to retrieve ideas from the database.'}), 500
+
+@routes.route('/test-openai', methods=['GET'])
+def test_openai():
+    """Test route to verify OpenAI API key is working."""
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": "Say hello!"}
+            ]
+        )
+        message = response.choices[0].message['content'].strip()
+        return jsonify({'message': message})
+    except Exception as e:
+        logging.error(f"OpenAI test error: {e}")
+        return jsonify({'error': str(e)}), 500
+
 
